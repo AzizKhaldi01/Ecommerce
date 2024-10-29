@@ -1,5 +1,5 @@
 const bcrypt = require("bcryptjs");
-const User = require("../models/User");
+const User = require("../../models/User");
 const jwt = require("jsonwebtoken");
 const { validationResult } = require("express-validator");
 
@@ -25,16 +25,13 @@ const register = async (req, res) => {
     if (user) {
       return res.status(400).json({ msg: "User already exists" });
     }
-    // Hash the password using the hashPassword function
     const hashedPassword = await hashPassword(password);
-    // Create a new user instance
     user = new User({
       name,
       email,
       password: hashedPassword, // Store the hashed password
     });
     await user.save();
-    // Generate a token using the email (or other info)
     const payload = {
       user: {
         email: user.email,
@@ -77,6 +74,8 @@ const login = async (req, res) => {
     const payload = {
       user: {
         id: user.id,
+        email: user.email,
+        role: user.roles,
       },
     };
 
@@ -84,26 +83,26 @@ const login = async (req, res) => {
       expiresIn: "1h",
     });
 
-    res.json({ token });
+    res.json({
+      token: token,
+      user: { email: user.email, name: user.name },
+    });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");
   }
 };
 
- 
- 
 // Route to get user info by token
 const GetUserInfoByToken = async (req, res) => {
   const user = await User.findOne(req.id);
-  if (!user) return res.status(404).json({ message: 'User not found' });
+  if (!user) return res.status(404).json({ message: "User not found" });
 
-  res.json({ name: user.name , email:user.email });
+  res.json({ name: user.name, email: user.email, rols: user.roles });
 };
-
 
 module.exports = {
   register,
   login,
-  GetUserInfoByToken
+  GetUserInfoByToken,
 };

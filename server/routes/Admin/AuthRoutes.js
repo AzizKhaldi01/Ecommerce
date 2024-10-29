@@ -1,8 +1,8 @@
 // routes/authRoutes.js
 const express = require('express');
 const { check } = require('express-validator');
-const { register, login, GetUserInfoByToken } = require('../controllers/authControler');
-const authenticateToken = require('../utils/authenticateToken');
+const { register, login, GetUserInfoByToken } = require('../../controllers/Admin/authControler');
+const authenticateToken = require('../../utils/authenticateToken');
 
 const router = express.Router();
 router.post(

@@ -38,6 +38,9 @@ function App() {
   return (
     <div className="App">
       <h1>Register</h1>
+      <h2>Register</h2>
+      <h3>Register</h3>
+      <p>Register</p>
       <form onSubmit={handleSubmit}>
         <div>
           <label>Name:</label>

@@ -1,4 +1,4 @@
-export function createSlug(title, category) {
+ function createSlug(title, category) {
     const slugify = (text) => {
       return text
         .toString() 
@@ -15,3 +15,4 @@ export function createSlug(title, category) {
 
     return `${categorySlug}-${titleSlug}-${uniqueId}`;
   }
+  module.exports = { createSlug };

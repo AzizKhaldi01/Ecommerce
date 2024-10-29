@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  h1 {
+    @apply text-3xl font-bold md:text-5xl;
+  }
+
+  h2 {
+    @apply text-2xl font-semibold md:text-4xl;
+  }
+
+  h3 {
+    @apply text-xl font-medium md:text-3xl;
+  }
+
+  p {
+    @apply text-base leading-relaxed md:text-lg;
+  }
+}
+
+
+@layer components {
+    .btn-primary {
+      @apply bg-blue-500 text-white px-4 py-2 rounded;
+    }
+  }

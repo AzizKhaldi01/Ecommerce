@@ -1,6 +1,6 @@
 // models/userModel.js
-const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
+const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
 
 const UserSchema = new mongoose.Schema({
   name: {
@@ -16,8 +16,12 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  roles: [
+    {
+      type: String,
+      enum: ["admin", "productManager", "orderManager", "teamManager", "user"],
+    },
+  ],
 });
 
-
-
-module.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.model("User", UserSchema);
