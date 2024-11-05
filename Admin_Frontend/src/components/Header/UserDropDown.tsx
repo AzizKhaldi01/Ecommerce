@@ -1,21 +1,22 @@
 import React from "react";
+import Avatar from "../UI/Avatar";
+import { ArrowDown01Icon } from "../../assets/login/icons/ArrowDownIcon";
 
-interface UserDropDownProps {
-  title: string;
-  count: number;
-  onClick: () => void;
+interface UserItem {
+  name: string;
+  image: string;
 }
 
-const UserDropDown: React.FC<UserDropDownProps> = ({
-  title,
-  count,
-  onClick,
-}) => {
+interface UserDropDownProps {
+  userData: UserItem; // Single user instead of an array
+}
+
+const UserDropDown: React.FC<UserDropDownProps> = ({ userData }) => {
+
   return (
-    <div>
-      <h1>{title}</h1>
-      <p>Count: {count}</p>
-      <button onClick={onClick}>Click Me</button>
+    <div className=" flex items-center pr-1 p-[0.15rem]  cursor-pointer  border-[1px] border-gray-300 rounded-full  gap-4 ">
+      <Avatar userData={userData} />
+      <ArrowDown01Icon/>
     </div>
   );
 };

@@ -7,6 +7,9 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  image: {
+    type: String,
+  },
   email: {
     type: String,
     required: true,
@@ -19,7 +22,14 @@ const UserSchema = new mongoose.Schema({
   roles: [
     {
       type: String,
-      enum: ["admin", "productManager", "orderManager", "teamManager", "user"],
+      enum: [
+        "admin",
+        "productManager",
+        "orderManager",
+        "teamManager",
+        "statisticManager",
+        "user",
+      ],
     },
   ],
 });

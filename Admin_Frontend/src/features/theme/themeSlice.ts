@@ -9,7 +9,7 @@ interface ThemeState {
 const initialState: ThemeState = {
   isDarkMode: false,
   dark: "bg-black text-white",
-  light: "bg-white",
+  light: "bg-[#E4E4E4]  ",
 };
 
 const themeSlice = createSlice({

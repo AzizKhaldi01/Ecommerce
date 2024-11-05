@@ -1,23 +1,28 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-
 @layer base {
   h1 {
-    @apply text-3xl font-bold md:text-5xl;
+    @apply text-xl font-bold md:text-3xl;
   }
-
   h2 {
-    @apply text-2xl font-semibold md:text-4xl;
+    @apply text-lg font-semibold md:text-2xl;
   }
-
   h3 {
-    @apply text-xl font-medium md:text-3xl;
+    @apply text-sm font-medium md:text-lg ;
   }
-
+  h4 {
+    @apply text-sm font-medium md:text-[1.2rem] ;
+  }
+  h5 {
+    @apply text-sm font-medium md:text-[1rem] ;
+  }
   p {
-    @apply text-base leading-relaxed md:text-lg;
+    @apply text-sm leading-relaxed md:text-base ;
   }
+}
+
+.app {
+  background-color: gainsboro;
 }

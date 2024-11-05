@@ -1,7 +1,7 @@
 // routes/authRoutes.js
 const express = require('express');
 const { check } = require('express-validator');
-const { register, login, GetUserInfoByToken } = require('../../controllers/Admin/authControler');
+const { register, login, GetUserInfoByToken, updateUser } = require('../../controllers/Admin/authControler');
 const authenticateToken = require('../../utils/authenticateToken');
 
 const router = express.Router();
@@ -22,6 +22,12 @@ router.post(
     check('password', 'Password is required').exists(),
   ],
   login
+);
+
+
+router.put(
+  '/profile',
+  updateUser
 );
 
 

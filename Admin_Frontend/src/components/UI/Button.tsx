@@ -1,52 +1,78 @@
 // src/components/Button.tsx
-import React from 'react';
+import React from "react";
+import Button from "@mui/material/Button";
+import CircularProgress from "@mui/material/CircularProgress";
 
-interface ButtonProps {
-  onClick: () => void;
+interface CustomButtonProps {
+  onClick?: () => void;
   children: React.ReactNode;
-  variant?: 'primary' | 'secondary' | 'main'; // Add variants as needed
+  fullWidth?: boolean;
+  variant?: "contained" | "outlined" | "text"; // Use MUI variants
   isLoading?: boolean;
+  rounded?: boolean;
   disabled?: boolean;
+  type?: "button" | "reset" | "submit";
+  borderColor?: string;
+  styles?: string;
+  rippleColor?: string;
 }
 
-const Button: React.FC<ButtonProps> = ({
+const CustomButton: React.FC<CustomButtonProps> = ({
   onClick,
   children,
-  variant = 'primary',
+  variant = "contained",
   isLoading = false,
   disabled = false,
+  type = "submit",
+  rounded = false,
+  fullWidth = false,
+  borderColor = "#e5e7eb",
+  rippleColor = "#6c6c6c",
+  styles,
 }) => {
-  const baseStyles = 'px-4 py-2 rounded transition duration-300 focus:outline-none';
-  const loadingStyles = 'opacity-50 cursor-not-allowed';
-  const primaryStyles = 'bg-blue-500 text-white hover:bg-blue-600';
-  const secondaryStyles = 'bg-gray-500 text-white hover:bg-gray-600';
-  const mainStyles = 'bg-green-500 text-white hover:bg-green-600';
-
-  const getVariantStyles = () => {
-    switch (variant) {
-      case 'secondary':
-        return secondaryStyles;
-      case 'main':
-        return mainStyles;
-      case 'primary':
-      default:
-        return primaryStyles;
-    }
-  };
+ 
+  const backgroundColor = "#2684FF"
 
   return (
-    <button
+    <Button
+      type={type}
+      sx={{
+        "& .MuiTouchRipple-root .MuiTouchRipple-child": {
+          backgroundColor: rippleColor,
+        },
+        backgroundColor: variant === "contained" ? backgroundColor : undefined,
+        color: variant === "contained" ? "#fff" : undefined, // Set text color for readability
+        "&:hover": {
+          backgroundColor:
+            variant === "contained" ? `${backgroundColor}CC` : undefined, // Slightly darken on hover
+        },
+      }}
       onClick={isLoading || disabled ? undefined : onClick}
-      className={`${baseStyles} ${getVariantStyles()} ${isLoading || disabled ? loadingStyles : ''}`}
+      variant={variant}
       disabled={isLoading || disabled}
+      className={` overflow-hidden  shadow-none `}
+      fullWidth={fullWidth}
+      style={{
+        boxShadow: "none",
+        borderRadius: rounded ? "50px" : "4px",
+        border:
+          variant === "outlined" && borderColor
+            ? `1px solid ${borderColor}`
+            : undefined, // Apply border color if outlined
+      }}
+      endIcon={
+        isLoading ? (
+          <div className=" absolute top-0   case right-0 w-full h-full flex items-center justify-center bg-gray-100">
+            <CircularProgress size={20} color="inherit" />
+          </div>
+        ) : null
+      } // Show loader when loading
     >
-      {isLoading ? (
-        <span className="loader">Loading...</span> // Add a loading indicator here
-      ) : (
-        children
-      )}
-    </button>
+      <span style={{ textTransform: "none" }} className={styles}>
+        {children}
+      </span>
+    </Button>
   );
 };
 
-export default Button;
+export default CustomButton;

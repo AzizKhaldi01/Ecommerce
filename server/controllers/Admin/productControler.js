@@ -39,35 +39,37 @@ const createProduct = async (req, res) => {
   }
 };
 
+
+
 const getProduct = async (req, res) => {
   try {
-    const { slog } = req.body;
-
+    const { slog } = req.params; 
     // Find the product by its ID and select only the fields you need
     const SelectedProduct = await Product.findOne({ slog });
     if (!SelectedProduct) {
       return res.status(404).json({ error: "Product not found" });
     }
- 
-    const { title, description, price, category, stock, variants } =
+
+    const { title, description, price, category, stock, variants, images } =
       SelectedProduct;
- 
+
     const selectedVariants = variants.map((variant) => ({
       price: variant.price,
-      image: variant.image[0], 
+      image: variant.image[0],
       title: variant.title,
       avalibleSizes: variant.availibleSizes,
       attributes: variant.attributes,
     }));
- 
+
     const newProduct = {
       title,
       description,
       price,
+      image: images[0],
       category,
       slog,
       stock,
-      variants: selectedVariants, 
+      variants: selectedVariants,
     };
 
     res.status(200).json(newProduct);
@@ -80,15 +82,12 @@ const getProduct = async (req, res) => {
 
 const updateProduct = async (req, res) => {
   try {
-    const { slog } = req.params; 
+    const { slog } = req.params;
     // Find the item by slog and update it
-    const updatedItem = await Product.findOneAndUpdate(
-      { slog }, 
-      req.body, 
-      { new: true }  
-    );
+    const updatedItem = await Product.findOneAndUpdate({ slog }, req.body, {
+      new: true,
+    });
 
-    
     if (!updatedItem) {
       return res.status(404).json({ error: "Item not found" });
     }
@@ -126,9 +125,11 @@ const DeleteProduct = async (req, res) => {
   }
 };
 
+
+
 const getAllProducts = async (req, res) => {
   try {
-    const { limit, page } = req.body; // Set default values
+    const { limit, page } = req.query; // Retrieve from the query parameters
     const skip = (page - 1) * limit;
 
     const Allresult = await Product.find({ status: "visible" }) // Filter for products with status 'visible'
@@ -148,7 +149,7 @@ const getAllProducts = async (req, res) => {
 
     res.status(200).json({
       totalProducts,
-      currentPage: page,
+      currentPage: Number(page),
       totalPages: Math.ceil(totalProducts / limit),
       products: result,
     });
@@ -159,8 +160,36 @@ const getAllProducts = async (req, res) => {
   }
 };
 
+const selectProductInfos = async (req, res) => {
+  try {
+    const { slog } = req.params;
+    const productData = await Product.findOne({ slog });
+ 
+
+    if (!productData) {
+      return res.status(400).json("product not found");
+    }
+
+    res.status(200).json({
+      title: productData.title,
+      status: productData.status,
+      price: productData.price,
+      slog: productData.slog,
+      discount: productData.discount,
+      images: productData.images, // Ensure this is an array
+      rating: productData.rating,
+      stock: productData.stock,
+    });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "Error retrieving products", message: error.message });
+  }
+};
+
 module.exports = {
   createProduct,
+  selectProductInfos,
   getProduct,
   updateProduct,
   DeleteProduct,
