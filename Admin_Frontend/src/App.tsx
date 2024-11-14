@@ -15,6 +15,7 @@ import Settings from "./pages/Settings";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import theme from "./components/MUI/Theme";
 import { ThemeProvider } from "@mui/material";
+import ToastContainerComponent from "./components/UI/Notification";
 
 function App() {
   const isDarkMode = useSelector(
@@ -27,33 +28,33 @@ function App() {
 
   return (
     <div className={`overflow-x-hidden  ${isDarkMode ? dark : light}   `}>
-     <ThemeProvider theme={theme}>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route
-          path="/dashboard"
-          element={
-            <PrivateRoute allowedRoles={["admin", "manager"]}>
-              <Dashboard />
-            </PrivateRoute>
-          }
-        />
-
-        <Route
-          path="/Products-add"
-          element={
-            // <PrivateRoute allowedRoles={["admin", "manager"]}>
+     <ToastContainerComponent/>
+      <ThemeProvider theme={theme}>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route
+            path="/dashboard"
+            element={
+              <PrivateRoute allowedRoles={["admin", "manager"]}>
+                <Dashboard />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/Products-add"
+            element={
+              // <PrivateRoute allowedRoles={["admin", "manager"]}>
               <AddProduct />
-            // </PrivateRoute>
-          }
-        />
-        <Route path="/sales" element={<Sales />} />
-        <Route path="/analytic" element={<Analytics />} />
-        <Route path="/settings" element={<Settings />} />
-        <Route path="/products" element={<Products />} />
-      </Routes>
+              // </PrivateRoute>
+            }
+          />
+          <Route path="/sales" element={<Sales />} />
+          <Route path="/analytic" element={<Analytics />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/products" element={<Products />} />
+        </Routes>
       </ThemeProvider>
     </div>
   );

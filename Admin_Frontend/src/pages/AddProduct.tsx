@@ -7,6 +7,7 @@ import { ButtonBase } from "@mui/material";
 import GeneralInformation from "../components/AddProduct/GeneralInformation";
 import ProductTypes from "../components/AddProduct/ProductTypes";
 import PImages from "../components/AddProduct/PImages";
+import ProductPrices from "../components/AddProduct/ProductPrices";
 
 const AddProduct: React.FC = () => {
   const [images, setImages] = useState<File[]>([]);
@@ -40,7 +41,8 @@ const AddProduct: React.FC = () => {
           </div>
 
           {/* right */}
-          <div className="  w-full lg:w-[35%] bg-gray-50">
+          <div className="  w-full lg:w-[35%] overflow-hidden flex h-[110vh]  flex-col gap-2 ">
+            <ProductPrices />
             <PImages images={images} setImages={setImages} />
           </div>
         </div>

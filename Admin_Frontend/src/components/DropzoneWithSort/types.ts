@@ -1,10 +1,11 @@
-import React from "react";
+import { Dispatch } from "redux";
+import { setImages } from "../../features/Product/productSlice";
 
 export interface DropzoneWithSortProps {
-  // onImagesChange: (images: File[]) => void;
   images: File[];
-  setImages: React.Dispatch<React.SetStateAction<File[]>>;
+  setImages: Dispatch<ReturnType<typeof setImages>>;
 }
+
 
 export interface ImageItemProps {
   file: File;

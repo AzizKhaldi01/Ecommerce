@@ -11,9 +11,8 @@ const theme = createTheme({
         root: {
           "& .MuiInputBase-root": {
             fontSize: "0.875rem",
-            height: "55px",
-            backgroundColor: "#F5F5F5", 
-        
+            height: "50px",
+            backgroundColor: "#F5F5F5",
           },
           "& .MuiInputLabel-root": {
             fontSize: "0.875rem",
@@ -29,9 +28,9 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           fontSize: "0.875rem",
-          backgroundColor: "#F5F5F5", 
-          height: "55px",         // Increase height for the select field
-          padding: "12px 16px",   // Increase padding for a larger dropdown area
+          backgroundColor: "#F5F5F5",
+          height: "50px", // Increase height for the select field
+          padding: "12px 16px", // Increase padding for a larger dropdown area
           "& .MuiSelect-select": {
             padding: "12px 16px", // Internal padding to match the TextField height
           },
@@ -43,7 +42,7 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           fontSize: "0.875rem",
-          minHeight: "40px",  // Set a minimum height for each dropdown item
+          minHeight: "40px", // Set a minimum height for each dropdown item
           padding: "10px 16px", // Adjust padding for a comfortable click area
         },
       },

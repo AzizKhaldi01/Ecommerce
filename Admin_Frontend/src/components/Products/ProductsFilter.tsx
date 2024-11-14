@@ -50,7 +50,7 @@ const ProductsFilter: React.FC<ProductsFilterProps> = ({
       </Button>
 
       <UiModal
-        width={{ xs: "90%", sm: "80%", md: "60%", lg: "30%" }}
+       width={" w-[90%] sm:w-[80%] md:w-[60%] lg:w-[30%]"}
         open={isModalOpen}
         onClose={HandelCloseFilter}
         content={

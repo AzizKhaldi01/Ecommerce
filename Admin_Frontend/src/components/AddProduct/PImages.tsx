@@ -1,15 +1,22 @@
 import React from "react";
 import DropzoneWithSort from "../DropzoneWithSort/DropzoneWithSort";
+import { useSelector } from "react-redux";
+import { RootState } from "../../app/store";
+import { setImages } from "../../features/Product/productSlice";
 
-interface PImagesProps {
-  images: File[];
-  setImages: React.Dispatch<React.SetStateAction<File[]>>;
-}
+const PImages: React.FC = () => {
+  const images = useSelector((state: RootState) => state.product.images);
+ 
+  console.log("images----------**********")
+  console.log(images)
 
-const PImages: React.FC<PImagesProps> = ({ images, setImages }) => {
   return (
-    <div>
-      <DropzoneWithSort images={images} setImages={setImages} />
+    <div className=" flex flex-col gap-3  h-[60%]  overflow-y-auto overflow-x-hidden lg:p-5 bg-gray-50 p-[1rem] ">
+      <h3>images</h3>
+      <DropzoneWithSort
+        images={images}
+        setImages={setImages}
+      />
     </div>
   );
 };

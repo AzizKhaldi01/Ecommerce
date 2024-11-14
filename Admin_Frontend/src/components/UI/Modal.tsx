@@ -7,12 +7,7 @@ interface ReusableModalProps {
   title?: string;
   content?: ReactNode;
   actions?: ReactNode;
-  width: {
-    xs?: string | number;
-    sm?: string | number;
-    md?: string | number;
-    lg?: string | number;
-  };
+  width: string;
 }
 
 const UiModal: React.FC<ReusableModalProps> = ({
@@ -29,21 +24,11 @@ const UiModal: React.FC<ReusableModalProps> = ({
       onClose={onClose}
       aria-labelledby="modal-title"
       aria-describedby="modal-content"
+      className=" overflow-auto"
     >
-      <Box
-        sx={{
-          position: "absolute" as "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          width: width, // Responsive width directly from props
-          bgcolor: "background.paper",
-          boxShadow: 24,
-          px: 4,
-          pb: 0,
-          pt: 4,
-          borderRadius: 2,
-        }}
+      <div
+        className={`absolute ${width} top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
+    bg-white shadow-xl px-4 pt-4 pb-0 rounded-lg`}
       >
         {title && (
           <Typography id="modal-title" variant="h6" mb={2}>
@@ -54,7 +39,7 @@ const UiModal: React.FC<ReusableModalProps> = ({
           {content}
         </Typography>
         {actions && <Box mt={2}>{actions}</Box>}
-      </Box>
+      </div>
     </Modal>
   );
 };
