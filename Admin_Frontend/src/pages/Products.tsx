@@ -36,19 +36,14 @@ const Products: React.FC = () => {
   //   setproductDetails(!productDetails);
   // };
 
-  
-
   // get all products with pagination
   useEffect(() => {
     const HandelGetProducts = async () => {
       setLoading(true);
       try {
         const data = await getProducts({ page, limit });
-
         setProducts(data.products);
-        setTimeout(() => {
-          setLoading(false);
-        }, 2000);
+        setLoading(false);
       } catch (error) {
         setLoading(false);
       }
